@@ -1,25 +1,26 @@
 # newton status
 
 ## Purpose
-
-Shows active phase, iteration counts, and blockers for a given execution (read-only).
+Queries the persisted artifacts for a specific execution to show active phase, iteration counts, and blockers.
 
 ## Required Input
-
 - `EXECUTION`: Execution identifier to inspect.
 
 ## Important Flags
+- `--workspace <PATH>`: optional workspace location (defaults to current directory).
 
-- `--workspace <PATH>`: workspace location (defaults to current directory).
-
-## Example
-
+## Example Invocation
 ```bash
 newton status exec_123 --workspace ./workspace
 ```
 
-## Tips
+For contributors in-tree:
 
+```bash
+cargo run -- status exec_123 --workspace ./workspace
+```
+
+## Extra Tips
 - `newton status --help` lists every option and default.
-- Set `--workspace` when querying executions outside the current directory.
-- Status only reads artifacts; it does not mutate files.
+- Set `--workspace` when querying executions stored outside the current directory.
+- Status reads artifacts only and will not mutate files, so it is safe to run repeatedly.
