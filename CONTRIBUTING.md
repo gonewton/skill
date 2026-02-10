@@ -35,3 +35,7 @@ Configure these repository secrets for the publish workflow:
 - `GITHUB_TOKEN`: Provided automatically by GitHub Actions
 
 Ensure the GitHub App has **Repository → Contents: Read and write** on this repository.
+
+## Keeping CLI docs aligned
+
+Command reference content originates from `../newton/skills/newton-cli-commands`. Before releasing a new skill package, copy the updated `SKILL.md` and every file under `references/` from that in-repo skill into `newton/` so the published skill reflects the CLI implementation (run, step, batch, status, report, error).
