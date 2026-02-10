@@ -1,24 +1,20 @@
 # newton error
 
 ## Purpose
-
-Diagnoses failures for a specific execution: stack traces, tool crashes, incompatible artifacts.
+Helps diagnose failures for a specific execution by surfacing stack traces, tool crashes, and incompatible artifacts.
 
 ## Required Input
-
 - `EXECUTION`: Execution identifier to debug.
 
 ## Important Flags
-
 - `--verbose`: include stack traces, raw logs, and contextual artifacts.
 
-## Example
-
+## Example Invocation
 ```bash
 newton error exec_999 --verbose
 ```
 
-## Tips
-
+## Extra Tips
 - Run `newton error --help` for the full list of options.
-- Capture command output; it often points to failing artifacts.
+- Pair `--verbose` with log tailing tools if you want to stream additional context while debugging.
+- Always capture the command output; it often includes direct pointers to failing artifacts.

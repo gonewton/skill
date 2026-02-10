@@ -8,8 +8,12 @@ gonewton/skill/
 └── newton/                   # Newton skill
     ├── SKILL.md              # Skill documentation
     ├── skill-project.toml     # Skill metadata
-    └── references/           # Command references (run, step, status, report, error)
+    └── references/           # Command references (run, step, batch, status, report, error)
 ```
+
+## Syncing CLI command content
+
+CLI command content is maintained in `gonewton/newton/skills/newton-cli-commands`. When that in-repo skill is updated, copy changes into `gonewton/skill/newton` before releasing: `SKILL.md` and `references/*.md` (run.md, step.md, batch.md, status.md, report.md, error.md).
 
 ## Development
 

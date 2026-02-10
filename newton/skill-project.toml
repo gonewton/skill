@@ -1,11 +1,11 @@
 [metadata]
 id = "newton"
-version = "1.0.0"
+version = "1.1.0"
 name = "newton"
-description = "Newton Loop anytime optimization framework. Use when running evaluator-advisor-executor cycles, configuring workspaces and GOAL.md, or operating newton run/step/status/report/error from the CLI."
+description = "Newton Loop anytime optimization framework. Use when running evaluator-advisor-executor cycles, configuring workspaces and GOAL.md, or operating newton run/step/batch/status/report/error from the CLI."
 author = "gonewton"
 tags = ["tools", "newton", "optimization", "cli", "evaluator-advisor-executor", "workspace"]
-capabilities = ["run-step-status-report-error", "workspace-config", "tools-config", "cli-commands"]
+capabilities = ["run-step-batch-status-report-error", "workspace-config", "tools-config", "cli-commands"]
 
 [dependencies]
 

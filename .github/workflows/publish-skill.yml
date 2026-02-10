@@ -105,7 +105,7 @@ jobs:
 
             - SKILL.md: Skill documentation
             - skill-project.toml: Skill metadata
-            - references/: Command references (run, step, status, report, error)
+            - references/: Command references (run, step, batch, status, report, error)
           files: ./artifacts/*.zip
           fail_on_unmatched_files: false
           draft: false
