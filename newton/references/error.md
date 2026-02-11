@@ -18,3 +18,4 @@ newton error exec_999 --verbose
 - Run `newton error --help` for the full list of options.
 - Pair `--verbose` with log tailing tools if you want to stream additional context while debugging.
 - Always capture the command output; it often includes direct pointers to failing artifacts.
+- During development, run `cargo run -- error exec_999 --verbose` to exercise the debugging command locally.

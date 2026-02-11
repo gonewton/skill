@@ -18,3 +18,4 @@ newton step ./workspace --execution-id exec_456
 - Use `newton step --help` to display all optional arguments.
 - `--execution-id` is optional but recommended so downstream tooling can correlate logs.
 - Ensure the workspace already contains artifacts from a previous `run` or `step` to avoid missing-context failures.
+- Contributors building locally can run `cargo run -- step ./workspace --execution-id exec_456`.

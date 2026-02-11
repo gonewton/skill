@@ -24,3 +24,4 @@ newton run ./workspace --max-iterations 5 --max-time 120
 - Strict-mode command overrides should point to executable binaries accessible from your PATH.
 - When redirecting artifact files, pre-create parent directories to avoid runtime errors.
 - Define `before_run` and `after_run` hooks inside `newton.toml` to run shell commands around `newton run`. Each hook executes with `sh -c "<value>"` in the project root, and the environment includes `NEWTON_GOAL_FILE`, `NEWTON_RESULT`, and (when batched) `NEWTON_PROJECT_ID`/`NEWTON_TASK_ID`.
+- When building from source, run `cargo run -- run ...` to exercise the CLI from this repository.

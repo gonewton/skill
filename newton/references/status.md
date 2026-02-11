@@ -18,3 +18,4 @@ newton status exec_123 --workspace ./workspace
 - `newton status --help` lists every option and default.
 - Set `--workspace` when querying executions stored outside the current directory.
 - Status reads artifacts only and will not mutate files, so it is safe to run repeatedly.
+- Developers can also run `cargo run -- status exec_123 --workspace ./workspace` when exercising the CLI locally.
