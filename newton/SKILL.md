@@ -89,13 +89,15 @@ cargo run -- status exec_123 --workspace ./workspace
 
 ## References
 
-- [references/run.md](references/run.md)
-- [references/step.md](references/step.md)
-- [references/batch.md](references/batch.md)
-- [references/status.md](references/status.md)
-- [references/report.md](references/report.md)
-- [references/error.md](references/error.md)
-- [references/monitor.md](references/monitor.md)
+- [references/configuration.md](references/configuration.md) - Complete configuration reference
+- [references/init.md](references/init.md) - Workspace initialization
+- [references/run.md](references/run.md) - Full optimization loop
+- [references/step.md](references/step.md) - Single iteration
+- [references/batch.md](references/batch.md) - Batch processing
+- [references/status.md](references/status.md) - Execution inspection
+- [references/report.md](references/report.md) - Result summarization
+- [references/error.md](references/error.md) - Failure diagnosis
+- [references/monitor.md](references/monitor.md) - Live monitoring
 
 ## Monitoring
 
