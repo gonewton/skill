@@ -1,12 +1,12 @@
 ---
 name: newton
-description: Newton Loop anytime optimization framework. Use when running evaluator-advisor-executor cycles, configuring workspaces and GOAL.md, or operating newton run/step/batch/status/report/error from the CLI.
+description: Newton CLI for iterative optimization and workflow automation. Use when running classic evaluator-advisor-executor cycles, configuring workspaces and GOAL.md, and operating workflow-graph commands.
 license: Apache-2.0
 ---
 
-# Newton Loop
+# Newton
 
-Newton Loop is an iterative optimization framework that runs evaluation, advice, and execution cycles until goals are met or limits are reached. Use this skill when you need to operate Newton from the CLI or set up workspaces and tools.
+Newton is an iterative optimization and workflow automation CLI. It supports both classic evaluation-advice-execution cycles and deterministic workflow-graph execution. Use this skill when you need to operate Newton commands or set up workspaces and toolchains.
 
 ## When to use
 
@@ -21,6 +21,7 @@ Newton Loop is an iterative optimization framework that runs evaluation, advice,
 - **Evaluator**: Assesses current state and provides quality metrics.
 - **Advisor**: Suggests improvements based on evaluation.
 - **Executor**: Applies recommendations.
+- **Workflow graph runner**: Deterministic task graph execution with lint, explain, checkpoint, artifact, and resume support.
 
 The cycle repeats until goals are met or iteration/time limits are reached.
 

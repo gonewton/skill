@@ -12,7 +12,7 @@ fastskill add https://github.com/gonewton/skill.git
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development and release details.
 
-The Newton skill now includes guidance for the new `newton monitor` command alongside `run`, `step`, `status`, `report`, and `error`. The batch documentation calls out the new `.newton/configs/<project_id>.conf` keys (`pre_run_script`, tooling overrides, `resume`, `max_iterations`, `max_time`, and `control_file`) as well as the `NEWTON_STATE_DIR`/`NEWTON_CONTROL_FILE` contract that gatekeeps success.
+The Newton skill includes guidance for `newton monitor`, classic loop commands (`run`, `step`, `batch`, `status`, `report`, `error`), and workflow-graph operations (`workflow run/lint/explain/resume/checkpoints/artifacts/webhook`). Batch documentation calls out `.newton/configs/<project_id>.conf` keys (`runner`, `workflow_file`, `pre_run_script`, tooling overrides, `resume`, `max_iterations`, `max_time`, and `control_file`) plus the `NEWTON_STATE_DIR`/`NEWTON_CONTROL_FILE` contract.
 
 ## License
 
