@@ -1,6 +1,6 @@
 [metadata]
 id = "newton"
-version = "1.1.0"
+version = "1.2.0"
 name = "newton"
 description = "Newton CLI for iterative optimization and workflow automation. Use for classic run/step loops plus workflow-graph commands and operational diagnostics."
 author = "gonewton"
