@@ -1,35 +1,35 @@
 # newton monitor
 
 ## Purpose
-Launches a terminal UI that streams every active ailoop channel (`<project>/<branch>`) from the workspace, groups messages by project/branch, and exposes a queue for answering questions or approving/denying authorizations without leaving the terminal.
+
+Terminal UI that streams ailoop channels, surfaces blocking questions and authorizations in a queue, and posts responses back to the ailoop HTTP API.
 
 ## Configuration
-- Newton discovers the workspace root by walking up from the current directory until it finds a directory that contains `.newton`.
-- It looks under `.newton/configs/` for the first `.conf` file (alphabetical) that defines both `ailoop_server_http_url` and `ailoop_server_ws_url`. If `.newton/configs/monitor.conf` exists and defines both keys, it is preferred.
-- When either URL needs to be overridden for the current run, use `--http-url` or `--ws-url`.
+
+Newton discovers the workspace root by walking up until it finds `.newton/`.
+
+Monitor needs **both** HTTP and WebSocket URLs. Resolution order:
+
+1. CLI: `--http-url` and `--ws-url` (partial overrides merge with config when the other value comes from a file).
+2. `.newton/configs/monitor.conf` if present.
+3. Other `.conf` files in `.newton/configs/`, sorted by filename, until both `ailoop_server_http_url` and `ailoop_server_ws_url` are set.
+
+See [configuration.md](configuration.md) for key names. `ailoop_ws_url` alone is **not** used by Newton; set the server pair or pass CLI URLs.
 
 ## Options
-- `--http-url <URL>`: Override the ailoop HTTP base URL for this session.
-- `--ws-url <URL>`: Override the ailoop WebSocket URL for this session.
 
-## Example Invocation
+- `--http-url <URL>`: ailoop HTTP base URL for this session.
+- `--ws-url <URL>`: ailoop WebSocket URL for this session.
+- `--backend`: Also start Newton's HTTP API (`newton serve`) alongside the monitor (see `newton monitor --help`).
+
+## Example
+
 ```bash
 newton monitor
+
+newton monitor --http-url http://127.0.0.1:8081 --ws-url ws://127.0.0.1:8080
 ```
 
-## Keybindings
-- `q` / `Ctrl+C`: Quit the monitor UI.
-- `Tab` / `n` / `Down` / `j`: Focus the next pending queue item.
-- `Up` / `k`: Focus the previous queue item.
-- `Enter` / `a`: Answer the focused question (enter text) or treat authorization as approve.
-- `d`: Deny the focused authorization.
-- `/`: Start typing a project or `project/branch` filter for the stream view.
-- `V`: Toggle between tiles and list stream layouts.
-- `Q`: Toggle the dedicated queue tab that consumes the full screen.
-- `?`: Show the help overlay with keybindings.
-- `Esc`: Cancel the current input/filter/help UX or exit the queue tab.
+## UI
 
-## Tips
-- Blocking messages (questions and authorizations) appear in the queue automatically. Approvals/denies post to `/api/v1/messages/:id/response` and the response circulates back through the stream when successful.
-- Near-timeout alerts flash the queue entry when a pending item is about to expire; move focus with `n`/`Tab` and act quickly.
-- The default stream layout is tiles; switch to list (`V`) for a single column, scrollable view when you want a chronological feed.
+Use `?` in the TUI for keybindings (filtering, queue focus, layout toggles, quit). Details vary by Newton version; prefer on-screen help over stale prose here.

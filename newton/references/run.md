@@ -1,27 +1,35 @@
 # newton run
 
 ## Purpose
-Runs the complete Newton optimization loop, repeatedly executing evaluator, advisor, and executor tools until limits defined in `RunArgs` are met.
 
-## Required Input
-- `WORKSPACE`: Path to the workspace directory containing Newton manifests.
+Execute a **workflow graph** from a YAML file: tasks run according to dependencies, operators, checkpoints, goal gates, and completion policy.
 
-## Important Flags
-- `--max-iterations <N>`: stop after N iterations (default 10).
-- `--max-time <SECONDS>`: hard wall-clock cap (default 300).
-- `--evaluator-cmd/--advisor-cmd/--executor-cmd`: override tool binaries for strict mode.
-- `--evaluator-status-file`, `--advisor-recommendations-file`, `--executor-log-file`: redirect artifact paths.
-- `--tool-timeout-seconds` and per-tool `--*-timeout` overrides.
-- `--goal-file <FILE>`: Use an existing goal file instead of writing `--goal` text (`NEWTON_GOAL_FILE` still points to the provided path).
+## Arguments
 
-## Example Invocation
+- **`WORKFLOW`** (positional, optional if `--file` is set): Path to the workflow YAML.
+- **`INPUT_FILE`** (optional second positional): Stored in the trigger payload as `input_file` for workflows that expect a spec path.
+
+## Important options
+
+- `--file <PATH>`: Workflow path (overrides positional `WORKFLOW` when both are set).
+- `--workspace <PATH>`: Workspace root (default: current directory). Checkpoints and artifacts resolve under this tree.
+- `--arg KEY=VALUE`: Merge into `triggers.payload` (repeatable). Values may use `@path` to read file contents; use `@@` for a literal `@`.
+- `--set KEY=VALUE`: Merge into workflow context at runtime (repeatable).
+- `--trigger-json <PATH>`: Load a JSON object as the base trigger payload before `--arg` merges.
+- `--parallel-limit N`, `--max-time-seconds N`, `--verbose`, `--server <URL>`: See `newton run --help`.
+
+## Examples
+
 ```bash
-newton run ./workspace --max-iterations 5 --max-time 120
+newton run workflow.yaml --workspace .
+
+newton run workflow.yaml input/spec.md --workspace ./proj --arg env=prod
+
+newton run --file ./workflows/ci.yaml --workspace . --verbose
 ```
 
-## Extra Tips
-- `newton run --help` shows every available flag with default values.
-- Strict-mode command overrides should point to executable binaries accessible from your PATH.
-- When redirecting artifact files, pre-create parent directories to avoid runtime errors.
-- Define `before_run` and `after_run` hooks inside `newton.toml` to run shell commands around `newton run`. Each hook executes with `sh -c "<value>"` in the project root, and the environment includes `NEWTON_GOAL_FILE`, `NEWTON_RESULT`, and (when batched) `NEWTON_PROJECT_ID`/`NEWTON_TASK_ID`.
-- When building from source, run `cargo run -- run ...` to exercise the CLI from this repository.
+## Notes
+
+- Validate and inspect first: `newton validate`, `newton lint`, `newton explain` on the same file.
+- Resume: `newton resume --execution-id <uuid>` (and related checkpoint commands).
+- The classic `newton run WORKSPACE` loop (evaluator or advisor or executor scripts only) is not the current execution model; express loops in workflow YAML instead.

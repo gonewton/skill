@@ -1,21 +1,5 @@
-# newton status
+# `newton status` (removed)
 
-## Purpose
-Queries the persisted artifacts for a specific execution to show active phase, iteration counts, and blockers.
+The **`status`** subcommand is not part of the current Newton CLI.
 
-## Required Input
-- `EXECUTION`: Execution identifier to inspect.
-
-## Important Flags
-- `--workspace <PATH>`: optional workspace location (defaults to current directory).
-
-## Example Invocation
-```bash
-newton status exec_123 --workspace ./workspace
-```
-
-## Extra Tips
-- `newton status --help` lists every option and default.
-- Set `--workspace` when querying executions stored outside the current directory.
-- Status reads artifacts only and will not mutate files, so it is safe to run repeatedly.
-- Developers can also run `cargo run -- status exec_123 --workspace ./workspace` when exercising the CLI locally.
+Inspect workflow execution with **`newton resume`**, **`newton checkpoints`**, **`newton artifacts`**, HTTP or WebSocket APIs from **`newton serve`**, and on-disk state under **`.newton/tasks/`** in the workspace you passed to `run` or `batch`. Use `newton --help` for the exact subcommands on your build.

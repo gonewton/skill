@@ -1,21 +1,5 @@
-# newton error
+# `newton error` (removed)
 
-## Purpose
-Helps diagnose failures for a specific execution by surfacing stack traces, tool crashes, and incompatible artifacts.
+The **`error`** subcommand is not part of the current Newton CLI.
 
-## Required Input
-- `EXECUTION`: Execution identifier to debug.
-
-## Important Flags
-- `--verbose`: include stack traces, raw logs, and contextual artifacts.
-
-## Example Invocation
-```bash
-newton error exec_999 --verbose
-```
-
-## Extra Tips
-- Run `newton error --help` for the full list of options.
-- Pair `--verbose` with log tailing tools if you want to stream additional context while debugging.
-- Always capture the command output; it often includes direct pointers to failing artifacts.
-- During development, run `cargo run -- error exec_999 --verbose` to exercise the debugging command locally.
+Diagnose failures from **workflow task stderr or stdout** (often with `newton run --verbose`), **non-zero task completion** in YAML runs, and **logs** under your tracing or deployment setup. Use **`newton explain`** or **`newton lint`** on the workflow file to catch authoring issues before run.
