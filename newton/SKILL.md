@@ -1,7 +1,8 @@
 ---
 name: newton
-description: Newton CLI for iterative optimization and workflow automation. Use when running workflow graphs (newton run or batch), configuring workspaces and GOAL.md, and operating validate, lint, explain, resume, checkpoints, artifacts, serve, monitor, or webhook.
+description: Newton CLI for workflow YAML graphs (operators, checkpoints, goal gates), batch plan queues, ailoop human-in-the-loop via monitor, and HTTP APIs via serve. Use when running or resuming workflows, validating or linting workflow files, managing checkpoints or artifacts, configuring .newton/configs, or using validate, lint, explain, dot, resume, checkpoints, artifacts, webhook, monitor, or batch.
 license: Apache-2.0
+compatibility: Requires the newton binary on PATH. newton init requires aikit on PATH for templates. newton monitor requires a running ailoop server unless your workflow docs say otherwise.
 ---
 
 # Newton
@@ -30,16 +31,46 @@ Verify: `newton --help` and `newton --version`.
 ## Quick start
 
 1. `newton --help` and `newton <command> --help` for flags.
-2. `newton init .` in an existing empty-target directory (requires `aikit` on `PATH`).
+2. `newton init [PATH]` to create `.newton/` and install the template via `aikit` (PATH defaults to the current directory).
 3. `newton run <workflow.yaml> --workspace <root>` (optional second positional input file for trigger payload).
 
-## Primary commands (current CLI)
+## CLI commands (source order)
 
-Use the built-in help for the exact list on your installed version. Typical workflow-oriented commands include:
+These subcommands match the current CLI (confirm with `newton --help` on your build):
 
-`run`, `init`, `batch`, `serve`, `monitor`, `validate`, `dot`, `lint`, `explain`, `resume`, `checkpoints`, `artifacts`, `webhook`.
+| Command | Role |
+| --- | --- |
+| `run` | Execute a workflow graph from YAML |
+| `init` | Create `.newton/` and install the default template |
+| `batch` | Process queued plans under `.newton/plan/<project_id>/` |
+| `serve` | HTTP/WebSocket API for workflow state and streaming |
+| `monitor` | Terminal UI for ailoop HIL channels |
+| `validate` | Validate workflow YAML before run |
+| `dot` | Emit Graphviz DOT for the workflow graph |
+| `lint` | Best-practice checks on a workflow file |
+| `explain` | Human-readable description of workflow behavior |
+| `resume` | Continue from a checkpoint (`--execution-id`) |
+| `checkpoints` | `list` / `clean` checkpoint data |
+| `artifacts` | `clean` old execution artifacts |
+| `webhook` | `serve` or `status` for webhook-triggered runs |
 
-There is **no** `step`, `status`, `report`, or `error` subcommand in current releases. Inspect runs via **checkpoints**, **resume**, **artifacts**, workflow logs, and `.newton/tasks/` layout under the project workspace.
+For commands without a dedicated reference file below, use `newton <cmd> --help` as the source of truth for flags and examples.
+
+There is **no** `step`, `status`, `report`, or `error` subcommand in current releases. Inspect runs via **checkpoints**, **resume**, **artifacts**, workflow logs, and `.newton/tasks/` under the project workspace. See [references/step.md](references/step.md) and related stubs for migration hints.
+
+## Typical flows
+
+1. **New workspace**: `newton init .` then set `workflow_file` in `.newton/configs/default.conf` when using batch; run workflows with `newton run path/to/workflow.yaml --workspace .`.
+2. **Queue of plans**: Configure `.newton/configs/<project_id>.conf` with `project_root` and `workflow_file`; place plans in `.newton/plan/<project_id>/todo/`; run `newton batch <project_id>`.
+3. **Live HIL**: Start [ailoop](https://github.com/goailoop/ailoop), point `.newton/configs/monitor.conf` at HTTP and WebSocket URLs (or pass `--http-url` / `--ws-url`), then `newton monitor`.
+4. **API / dashboards**: `newton serve` exposes REST, WebSocket, and SSE endpoints for workflow instances and streams (see `newton serve --help` and the Newton repository `README.md` when updated).
+
+## Usage notes
+
+- `newton init` requires `aikit` on `PATH` and refuses to run if `.newton` already exists (remove it or pick another directory).
+- `newton run` resolves the workflow path from `--file` if set, otherwise the first positional argument.
+- `--server <URL>` on `newton run` registers the run with a Newton API instance started via `newton serve` for lifecycle notifications.
+- Checkpoint and artifact layouts live under `.newton/` inside the workspace you pass with `--workspace` (or the discovered project root for batch).
 
 ## Quick reference
 
@@ -61,6 +92,6 @@ newton monitor
 - [references/batch.md](references/batch.md)
 - [references/monitor.md](references/monitor.md)
 
-The in-repo skill under `gonewton/newton/skills/newton-cli-commands/` mirrors CLI-focused sheets; prefer `newton <cmd> --help` when behavior differs by version.
+**Canonical skill:** agent instructions for Newton CLI are maintained in [gonewton/skill](https://github.com/gonewton/skill) (`newton/`). Prefer `newton <cmd> --help` when behavior differs by version.
 
 Organization-specific shell or YAML that sources the same `.conf` files (extra keys, `develop` wrappers) is **not** documented here; keep that in your own workspace skill or internal docs.

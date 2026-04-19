@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Create a **Newton workspace**: `.newton/` layout, plan queue directories, default config stub, and template content installed via **aikit-sdk** (requires **`aikit` on `PATH`**).
+Create a **Newton workspace**: `.newton/` layout, plan queue directories, default config stub, and template content installed via **aikit** (templates fetched or rendered through **aikit-sdk**; **`aikit` must be on `PATH`**).
 
 ## Requirements
 
