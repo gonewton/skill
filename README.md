@@ -1,6 +1,6 @@
 # Newton Skill Repository
 
-This repository contains the Newton skill for AI Agent Skills. Use the FastSkill CLI to install and use it.
+This repository contains the **Newton** skill for [Agent Skills](https://agentskills.io/). Use the FastSkill CLI to install it.
 
 ## Installation
 
@@ -14,35 +14,17 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for development and release details.
 
 ## What the skill covers
 
-The Newton skill provides guidance for all Newton CLI commands and workflow graph operations:
+The skill documents the **workflow-first** Newton CLI: YAML workflow graphs (operators, checkpoints, goal gates), workspace layout under `.newton/`, and command-line usage aligned with `newton --help`.
 
-**Classic loop commands:**
-- `newton run` / `newton step` — start or single-step the eval-advisor-executor loop
-- `newton batch <project_id>` — process queued plan files; `.conf` keys, hooks, control file contract
-- `newton status` / `newton report` / `newton error` — inspect execution state
-- `newton monitor` — live TUI for human-in-the-loop messages and approvals
+**Commands and topics** (see [`newton/SKILL.md`](newton/SKILL.md) for the full table and flows):
 
-**Workflow graph commands:**
-- `newton workflow run|lint|validate|dot|explain|resume|checkpoints|artifacts|webhook`
-- YAML schema: tasks, transitions, `$expr` conditions, `include_if`, `{{ ... }}` interpolation
-- Macro authoring: `MacroDefinition` + `MacroInvocation` with `with:` params
-- Execution settings: `parallel_limit`, `max_workflow_iterations`, `max_task_iterations`, `timeout_ms`
-- Completion policy: `goal_gate`, `require_goal_gates`, `goal_gate_failure_behavior`
-- Durability: checkpoint persistence, `newton workflow resume`, artifact routing/cleanup
+- **Run and inspect workflows:** `run`, `validate`, `lint`, `explain`, `dot`, `resume`, `checkpoints`, `artifacts`
+- **Workspace and queues:** `init`, `batch` (plan queue under `.newton/plan/<project_id>/`), `.newton/configs` keys in [references/configuration.md](newton/references/configuration.md)
+- **APIs and HIL:** `serve`, `monitor` (with [ailoop](https://github.com/goailoop/ailoop)), `webhook`
 
-**Built-in operators:**
+Current releases do **not** expose top-level `step`, `status`, `report`, or `error` subcommands. The skill includes short [references](newton/references/) stubs explaining what to use instead.
 
-| Operator | Purpose |
-|---|---|
-| `NoOpOperator` | Pass-through step; useful for routing and branching |
-| `CommandOperator` | Run shell commands; captures stdout/stderr as JSON output |
-| `SetContextOperator` | Deep-merge a patch object into the global workflow context |
-| `ReadControlFileOperator` | Read and parse a JSON file from a path resolved at runtime |
-| `AssertCompletedOperator` | Assert that a set of task IDs have completed before proceeding |
-| `HumanApprovalOperator` | Pause for a boolean approve/reject decision from a human operator |
-| `HumanDecisionOperator` | Pause for a multiple-choice selection from a human operator |
-
-**Batch configuration:** `.newton/configs/<project_id>.conf` keys (`runner`, `workflow_file`, `pre_run_script`, tooling overrides, `resume`, `max_iterations`, `max_time`, `control_file`) and the `NEWTON_STATE_DIR`/`NEWTON_CONTROL_FILE` environment variable contract.
+**Reference layout:** [`newton/references/`](newton/references/) holds focused sheets (`configuration`, `init`, `run`, `batch`, `monitor`) plus stubs for removed command names. Deeper workflow YAML semantics (tasks, operators, macros) live in the Newton repository documentation; this skill centers on CLI and workspace configuration.
 
 ## License
 
