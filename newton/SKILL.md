@@ -7,11 +7,11 @@ compatibility: Requires the newton binary on PATH. newton init requires aikit on
 
 # Newton
 
-Newton is a **workflow-first** CLI: YAML workflow graphs with operators, checkpoints, artifacts, and goal gates. Classic evaluator, advisor, and executor-only loops are expressed inside workflows now, not as separate top-level commands.
+Newton is a **workflow-first** CLI: YAML workflow graphs with operators, checkpoints, artifacts, and goal gates. Classic evaluator, advisor, and executor-only loops are expressed inside workflows now, not as separate top-level commands. **Sub-workflows** are supported: a task can invoke another workflow file with `WorkflowOperator` (`workflow_path`, optional `context` and `triggers` merges), subject to workspace path rules and a maximum nesting depth.
 
 ## When to use
 
-- Running or resuming workflows, batch plan queues, or webhook-driven runs.
+- Running or resuming workflows (including graphs that call nested workflows via `WorkflowOperator`), batch plan queues, or webhook-driven runs.
 - Initializing a workspace (`newton init`) and editing `.newton/configs/*.conf`.
 - Validating or explaining workflow YAML; cleaning checkpoints or artifacts.
 - Operating `newton monitor` against ailoop, or `newton serve` for HTTP or WebSocket APIs.
