@@ -2,11 +2,11 @@
 
 `newton serve` runs the Axum server with dashboard, portfolio, plans, workflows, HIL, operators, and persistence routes. **`newton serve --help` currently documents only part of this surface.** Use this reference and the OpenAPI file as accurate contracts.
 
-## Canonical OpenAPI (REST)
+## OpenAPI spec (REST)
 
-https://github.com/gonewton/newton/blob/main/openapi/newton-backend-parity.yaml
+**Bundled copy (works offline):** [newton-backend-parity.yaml](newton-backend-parity.yaml) — same file as `openapi/newton-backend-parity.yaml` in the Newton repository; refresh that copy when parity paths or schemas change.
 
-`info.version` tracks the generated spec. Schemas and query parameters live there.
+`info.version` tracks the generated spec. Schemas and query parameters live in the YAML file.
 
 ## REST endpoints (parity spec)
 
