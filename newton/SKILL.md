@@ -43,7 +43,7 @@ These subcommands match the current CLI (confirm with `newton --help` on your bu
 | `run` | Execute a workflow graph from YAML |
 | `init` | Create `.newton/` and install the default template |
 | `batch` | Process queued plans under `.newton/plan/<project_id>/` |
-| `serve` | HTTP/WebSocket API for workflow state and streaming |
+| `serve` | HTTP API: parity REST (dashboard, portfolio, workflows, HIL, etc.), WebSocket/SSE streams (see references) |
 | `monitor` | Terminal UI for ailoop HIL channels |
 | `validate` | Validate workflow YAML before run |
 | `dot` | Emit Graphviz DOT for the workflow graph |
@@ -63,7 +63,7 @@ There is **no** `step`, `status`, `report`, or `error` subcommand in current rel
 1. **New workspace**: `newton init .` then set `workflow_file` in `.newton/configs/default.conf` when using batch; run workflows with `newton run path/to/workflow.yaml --workspace .`.
 2. **Queue of plans**: Configure `.newton/configs/<project_id>.conf` with `project_root` and `workflow_file`; place plans in `.newton/plan/<project_id>/todo/`; run `newton batch <project_id>`.
 3. **Live HIL**: Start [ailoop](https://github.com/goailoop/ailoop), point `.newton/configs/monitor.conf` at HTTP and WebSocket URLs (or pass `--http-url` / `--ws-url`), then `newton monitor`.
-4. **API / dashboards**: `newton serve` exposes REST, WebSocket, and SSE endpoints for workflow instances and streams (see `newton serve --help` and the Newton repository `README.md` when updated).
+4. **API / dashboards**: `newton serve` exposes the full parity REST surface (products, components, opportunities, plans, workflows, persistence, …) plus stream endpoints. **`newton serve --help` is incomplete** as of current releases; use [references/serve-api.md](references/serve-api.md) and the OpenAPI file linked there as the contract.
 
 ## Usage notes
 
@@ -86,6 +86,7 @@ newton monitor
 
 ## References
 
+- [references/serve-api.md](references/serve-api.md) — `newton serve` REST paths, OpenAPI link, streams note
 - [references/configuration.md](references/configuration.md) — `.newton/configs` keys read by Newton (`batch`, `monitor`, `init` stub)
 - [references/init.md](references/init.md)
 - [references/run.md](references/run.md)
