@@ -2,18 +2,18 @@
 
 ## Purpose
 
-Create a **Newton workspace**: `.newton/` layout, plan queue directories, default config stub, and template content installed via **aikit** (templates fetched or rendered through **aikit-sdk**; **`aikit` must be on `PATH`**).
+Create a **Newton workspace**: `.newton/` layout, plan queue directories, default config stub, and template content installed via the statically linked **aikit-sdk** (the `aikit` binary is **not** required on `PATH`).
 
 ## Requirements
 
-- Target path must be an **existing** directory.
+- Target path defaults to the current directory; it is created if missing and must be a directory.
 - `.newton` must **not** already exist there (remove it or pick another path).
-- **`aikit`** available for template install (see Newton repository `README.md`).
+- Network access to GitHub for the default template source (not needed when `--template` points at a local path).
 
 ## Arguments
 
 - **`PATH`** (optional positional): Directory to initialize (defaults to current directory; canonicalized to absolute).
-- `--template-source <SOURCE>`: Template locator (GitHub slug, URL, or local path). Default: `gonewton/newton-templates`.
+- `--template <SOURCE>`: Template locator (GitHub slug, URL, or local path). Default: `gonewton/newton-templates`.
 
 ## What gets created
 
@@ -25,7 +25,7 @@ Create a **Newton workspace**: `.newton/` layout, plan queue directories, defaul
 ```bash
 newton init .
 
-newton init /path/to/repo --template-source gonewton/newton-templates
+newton init /path/to/repo --template gonewton/newton-templates
 ```
 
 ## Next steps
